@@ -1,0 +1,131 @@
+
+html, body{
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: #e7eaee;
+  font-size: 16px;
+  @import url('https://fonts.googleapis.com/css?family=Nunito&display=swap');
+  @import url(https://fonts.googleapis.com/css?family=Roboto:300);
+}
+
+
+.nav_bar{
+  width: 100%;
+  height: 70px;
+  background-color: white;
+  font-size: 3rem;
+  box-shadow: 0px 0px 10px #aaaaaa;
+  display: flex;
+  align-items: center;
+}
+
+.logo{
+  font-family: 'Nunito', sans-serif;
+  width: 20%;
+  height: auto;
+  margin-left: 3%;
+
+}
+
+.container{
+  width: 75%;
+  height: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 3%;
+  display: flex;
+  flex-direction: row;
+}
+
+.row1{
+  width: 50%;
+  height: 100%;
+  padding-left: 10%;
+}
+
+.row1_logo{
+  font-size: 8rem;
+  font-weight: 900;
+}
+
+.row1_logo_down{
+  font-size: 3rem;
+
+}
+
+.row1_explain{
+  font-size: 2rem;
+}
+
+.row2{
+  width: 50%;
+  height: 100%;
+}
+
+.register_form{
+  background-color: white;
+  border-radius: 10%;
+  width: 70%;
+  height: 80%;
+  display: flex;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 7%;
+  flex-direction: column;
+  box-shadow: 0px 0px 15px #aaaaaa;
+}
+
+.form_logo{
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 10%;
+  margin-top: 10%;
+}
+
+.register_input{
+  font-family: "Roboto", sans-serif;
+  outline: 0;
+  background: #f2f2f2;
+  width: 100%;
+  border: 0;
+  margin: 15px 0 15px;
+  padding: 15px;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+
+.register_button{
+  font-family: "Roboto", sans-serif;
+  text-transform: uppercase;
+  outline: 0;
+  background-color: slategrey;
+  width: 100%;
+  border: 0;
+  text-align: center;
+  padding: 15px;
+  color: #FFFFFF;
+  font-size: 14px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+.login_button{
+  font-family: "Roboto", sans-serif;
+  text-transform: uppercase;
+  outline: 0;
+  background-color: gray;
+  width: 100%;
+  border: 0;
+  text-align: center;
+  padding: 15px;
+  color: #FFFFFF;
+  font-size: 14px;
+  cursor: pointer;
+  margin-top: 10px;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+}
+
+
