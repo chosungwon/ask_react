@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './App.scss';
 import axios from 'axios';
 import {Link} from "react-router-dom";
@@ -10,111 +10,183 @@ type Rform = {
     email: string;
 };
 
-const App = ({id, pwd, r_pwd, email}: Rform) => {
-    const [form, setForm] = useState({
+class App extends React.Component<any, any>{
+    state={
         id: '',
         pwd: '',
         r_pwd: '',
         email: '',
 
-        a: 0,
-
         id_border: 'white',
         email_border: 'white',
         pwd_border: 'white',
         r_pwd_border: 'white'
-    });
-
-    const id_regex = new RegExp('/^[A-Za-z0-9]{5,12}$/');
-    const pwd_regex = new RegExp('/^.*(?=^.{8,16}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/');
-    const email_regex = new RegExp('/^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i');
-
-
-
-    const onChange1 = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setForm({
-            ...form,
-            [e.target.name]: e.target.value,
-        })
-
-
-        if (form.r_pwd !== form.pwd){
-
-            setForm({
-                ...form,
-                r_pwd_border: 'red',
-            })
-        }
-        else if (form.r_pwd === form.pwd){
-            setForm({
-                ...form,
-                r_pwd_border: 'blue'
-            })
-        }
-    };
-
-    const onFocus1 = (e: React.FocusEvent<HTMLInputElement>) => {
-
-
-        if (form.r_pwd !== form.pwd) {
-
-            setForm({
-                ...form,
-                r_pwd_border: 'red',
-            })
-        }
-        else if (form.r_pwd === form.pwd) {
-            setForm({
-                ...form,
-                r_pwd_border: 'blue'
-            })
-        }
-    };
-
-    const send = (e: React.MouseEvent<HTMLInputElement, MouseEvent>) => {
-        e.preventDefault();
-        let data:any = {
-            id: form.id,
-            email: form.email,
-            pwd: form.pwd
-        }
-        axios.post('http://localhost:3001/register', data )
-            .then(res=>{
-                console.log(res.data)
-            })
     }
+    render(){
+        const id_regex = /^[A-Za-z0-9]{5,12}$/;
+        const pwd_regex = /^.*(?=^.{8,16}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;
+        const email_regex = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
 
-    return (
-        <>
-            <div className={'nav_bar'}>
-                <div className={'logo'}>ASK</div>
-            </div>
-            <div className={'container'}>
-                <div className={'row1'}>
-                    <h1 className={'row1_logo'}>에스크</h1>
-                    <p className={'row1_logo_down'}>평범한 에스크</p>
-                    <p className={'row1_explain'}>무엇인가 비어있다.</p>
+        let id_text = "영어와 숫자로 5~12자 만들어주세요.";
+        let email_text = "이메일 형식에 맞지않습니다.";
+        let pwd_text = "영어와 숫자, 특수문자로 8~16자를 만들어주세요.";
+        let r_pwd_text = "비밀번호가 일치하지 않습니다.";
+
+
+
+        const onChange1 = (e: React.ChangeEvent<HTMLInputElement>) => {
+            this.setState({
+                [e.target.name]: e.target.value,
+            })
+        };
+
+        const onFocus1 = (e: React.FocusEvent<HTMLInputElement>) => {
+            console.log(id_regex.test(this.state.id))
+            if (!id_regex.test(this.state.id)) {
+                this.setState({
+                    id_border: 'red'
+                })
+            }
+            if (id_regex.test(this.state.id)) {
+                this.setState({
+                    id_border: 'white'
+                })
+                id_text = "";
+            }
+
+            if (!pwd_regex.test(this.state.pwd)) {
+                this.setState({
+                    pwd_border: 'red'
+                })
+            }
+            if (pwd_regex.test(this.state.pwd)) {
+                this.setState({
+                    pwd_border: 'white'
+                })
+            }
+
+            if (!email_regex.test(this.state.email)) {
+                this.setState({
+                    email_border: 'red'
+                })
+            }
+            if (email_regex.test(this.state.email)) {
+                this.setState({
+                    email_border: 'white'
+                })
+            }
+
+            if (this.state.pwd !== this.state.r_pwd) {
+                this.setState({
+                    r_pwd_border: 'red'
+                })
+            }
+            if(this.state.pwd === this.state.r_pwd){
+                this.setState({
+                    r_pwd_border: 'white'
+                })
+            }
+        };
+
+        const onBlur1 = (e: React.FocusEvent<HTMLInputElement>) => {
+            if (!id_regex.test(this.state.id)) {
+                this.setState({
+                    id_border: 'red'
+                })
+            }
+            if (id_regex.test(this.state.id)) {
+                this.setState({
+                    id_border: 'white'
+                })
+            }
+
+            if (!pwd_regex.test(this.state.pwd)) {
+                this.setState({
+                    pwd_border: 'red'
+                })
+            }
+            if (pwd_regex.test(this.state.pwd)) {
+                this.setState({
+                    pwd_border: 'white'
+                })
+            }
+
+            if (!email_regex.test(this.state.email)) {
+                this.setState({
+                    email_border: 'red'
+                })
+            }
+            if (email_regex.test(this.state.email)) {
+                this.setState({
+                    email_border: 'white'
+                })
+            }
+
+
+
+            if (this.state.pwd !== this.state.r_pwd) {
+                this.setState({
+                    r_pwd_border: 'red'
+                })
+            }
+            if(this.state.pwd === this.state.r_pwd){
+                this.setState({
+                    r_pwd_border: 'white'
+                })
+            }
+        };
+
+        const send = (e: React.MouseEvent<HTMLInputElement, MouseEvent>) => {
+            e.preventDefault();
+            let data:any = {
+                id:  this.state.id,
+                email: this.state.email,
+                pwd: this.state.pwd
+            }
+            axios.post('http://localhost:3001/register', data )
+                .then(res=>{
+                    console.log(res.data)
+                })
+        }
+
+
+
+        return(
+            <>
+                <div className={'nav_bar'}>
+                    <div className={'logo'}>ASK</div>
                 </div>
-                <div className={'row2'}>
-                    <div className={'register_form'}>
-                        <h1 className={'form_logo'}>가입하기</h1>
-                        <form>
-                            <input type={'text'} className={'register_input'} style={{borderColor: form.id_border}} name={'id'} id={'id'} placeholder={'아이디'} onChange={onChange1} onFocus={onFocus1}/>
-                            <input type={'text'} className={'register_input'} style={{ borderColor: form.email_border }} name={'email'} id={'email'} placeholder={'이메일'} onChange={onChange1} onFocus={onFocus1}/>
-                            <input type={'text'} className={'register_input'} style={{ borderColor: form.pwd_border }} name={'pwd'} id={'pwd'} placeholder={'비밀번호'} onChange={onChange1} onFocus={onFocus1}/>
-                            <input type={'text'} className={'register_input'} style={{ borderColor: form.r_pwd_border }} name={'r_pwd'} id={'r_pwd'} placeholder={'비밀번호 확인'} onChange={onChange1} onFocus={onFocus1}/>
-                            <input type={'submit'} className={'register_button'}  id={'register'} value={'가입'} onClick={send} />
-                        </form>
+                <div className={'container'}>
+                    <div className={'row1'}>
+                        <h1 className={'row1_logo'}>에스크</h1>
+                        <p className={'row1_logo_down'}>평범한 에스크</p>
+                        <p className={'row1_explain'}>무엇인가 비어있다.</p>
+                    </div>
+                    <div className={'row2'}>
+                        <div className={'register_form'}>
+                            <h1 className={'form_logo'}>가입하기</h1>
+                            <form>
+                                <input type={'text'} className={'register_input'} style={{borderColor: this.state.id_border}} name={'id'} id={'id'} placeholder={'아이디'} onChange={onChange1} onFocus={onFocus1} onBlur={onBlur1}/>
+                                <span style={{fontSize: 10, color: 'red'}}>{id_text}</span>
+                                <input type={'text'} className={'register_input'} style={{ borderColor: this.state.email_border }} name={'email'} id={'email'} placeholder={'이메일'} onChange={onChange1} onFocus={onFocus1} onBlur={onBlur1}/>
+                                <span style={{fontSize: 10, color: 'red'}}>{email_text}</span>
+                                <input type={'password'} className={'register_input'} style={{ borderColor: this.state.pwd_border }} name={'pwd'} id={'pwd'} placeholder={'비밀번호'} onChange={onChange1} onFocus={onFocus1} onBlur={onBlur1}/>
+                                <span style={{fontSize: 10, color: 'red'}}>{pwd_text}</span>
+                                <input type={'password'} className={'register_input'} style={{ borderColor: this.state.r_pwd_border }} name={'r_pwd'} id={'r_pwd'} placeholder={'비밀번호 확인'} onChange={onChange1} onFocus={onFocus1} onBlur={onBlur1}/>
+                                <span style={{fontSize: 10, color: 'red'}}>{r_pwd_text}</span>
+                                <input type={'submit'} className={'register_button'}  id={'register'} value={'가입'} onClick={send} />
+                            </form>
 
-                        <hr style={{width: '99.5%', marginTop: 20}}/>
+                            <hr style={{width: '99.5%', marginTop: 20}}/>
 
 
-                        <button className={'login_button'}><Link to={'/login'}>로그인</Link></button>
+                            <button className={'login_button'}><Link to={'/login'}>로그인</Link></button>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </>
-    );
+            </>
+        )
+    }
 }
 
 //이메일 함
